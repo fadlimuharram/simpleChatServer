@@ -10,4 +10,4 @@ EXPOSE 8087
 RUN pwd
 RUN ls -a
 RUN cat package.json
-CMD [ "npm", "start" ]
+CMD [ "npm","start" ]
