@@ -6,6 +6,7 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIO(server);
 const {mongoose} = require('./config/mongoose');
+const {rahasiaJWT} = require('./config/secret');
 var socketioJwt   = require("socketio-jwt");
 
 const port = process.env.PORT || 3000;
@@ -21,7 +22,7 @@ app.use(bodyParser.json());
 app.use((req,res,next)=>{
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    res.setHeader('Access-Control-Allow-Headers', 'Authorization,X-Requested-With,content-type');
 
     next();
 
@@ -30,16 +31,16 @@ app.use((req,res,next)=>{
 
 var route = require('./route')(app);
 
-/*
+
 io.use(socketioJwt.authorize({
-    secret: rahasia,
+    secret: rahasiaJWT,
     handshake: true
 }));
 
 io.on('connection',(socket)=>{
     console.log('hello! ', socket.decoded_token.username);
     
-});*/
+});
 
 
 

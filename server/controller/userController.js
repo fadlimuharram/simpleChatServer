@@ -83,8 +83,18 @@ var login = (req,res)=>{
     }
 }
 
+var index = (req,res)=>{
+    User.find().then((users)=>{
+        if(!users){
+            return res.send({condition:0});
+        }
+        return res.send(users);
+    })
+}
+
 module.exports = {
     create,
-    login
+    login,
+    index
 }
 
