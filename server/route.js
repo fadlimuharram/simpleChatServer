@@ -13,7 +13,8 @@ verifyToken=(req,res,next)=>{
                 console.log(err);
                 res.sendStatus(403);
             }else{
-                next();
+                req.id = authData.id;
+                next(); 
             }
         });
         

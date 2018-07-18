@@ -1,4 +1,4 @@
-const {User} = require('../model/User');
+const {Chat} = require('../model/Chat');
 const _ = require('lodash');
 const CryptoJS = require('crypto-js');
 const {rahasiaJWT,passwordSecret} = require('../config/secret');
@@ -69,7 +69,7 @@ var login = (req,res)=>{
                 res.send({
                     id:data.id,
                     username:data.username,
-                    token: jwt.sign({ username: data.username,'id':data._id }, rahasiaJWT, { expiresIn: '1h' }),
+                    token: jwt.sign({ username: 'fadli' }, rahasiaJWT, { expiresIn: '1h' }),
                     condition:1
                 })
             }else{
@@ -84,8 +84,7 @@ var login = (req,res)=>{
 }
 
 var index = (req,res)=>{
-    
-    User.find({_id:{$ne:req.id}}).then((users)=>{
+    User.find().then((users)=>{
         if(!users){
             return res.send({condition:0});
         }
